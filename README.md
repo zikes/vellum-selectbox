@@ -2,7 +2,7 @@
 
 A dropdown selector with search, replacing `<select>`s.
 
-Simple Example:
+## Simple Example:
 
 ```
 <zikes-selectbox placeholder="Simple">
@@ -17,7 +17,9 @@ Simple Example:
 </zikes-selectbox>
 ```
 
-More Complex:
+![simple](./screenshots/simple.png)
+
+## More Complex:
 
 ```
 <zikes-selectbox placeholder="Src + Multiline">
@@ -31,3 +33,19 @@ More Complex:
   </select>
 </zikes-selectbox>
 ```
+
+![icon+multiline](./screenshots/icon-multiline.png)
+
+## Effects!
+
+![selecting](./screenshots/selecting.png)
+
+## Search!
+
+![selecting](./screenshots/search.png)
+
+## Keyboard Accessibility!
+
+Use `Up` and `Down` to highlight items, `Enter` to select/deselect, `Backspace` to remove items, and `Escape` to hide the dropdown.  The dropdown list automatically scrolls as necessary, too!
+
+![selecting](./screenshots/keyboarding.png)
