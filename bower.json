@@ -1,0 +1,30 @@
+{
+  "name": "zikes-selectbox",
+  "version": "0.0.0",
+  "description": "Turns a `<select>` into a functional combobox.",
+  "keywords": [
+    "web-component",
+    "web-components",
+    "polymer"
+  ],
+  "main": "zikes-selectbox.html",
+  "homepage": "https://github.com/zikes/zikes-selectbox",
+  "ignore": [
+    "/.*",
+    "/test/",
+    "/demo/"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.0.0",
+    "zikes-chip": "zikes/zikes-chip",
+    "paper-styles": "PolymerElements/paper-styles#^1.0.0",
+    "paper-item": "PolymerElements/paper-item#^1.0.0",
+    "iron-input": "PolymerElements/iron-input#^1.0.0",
+    "iron-icon": "PolymerElements/iron-icon#^1.0.0"
+  },
+  "devDependencies": {
+    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
+    "iron-icons": "PolymerElements/iron-icons#^1.0.0",
+    "web-component-tester": "*"
+  }
+}

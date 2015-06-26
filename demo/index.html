@@ -1,0 +1,131 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+    <title>zikes-selectbox Demo</title>
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="../zikes-selectbox.html">
+    <link rel="import" href="../../iron-icons/iron-icons.html">
+    <link rel="import" href="../../paper-styles/paper-styles.html">
+    <style is="custom-style">
+      body {
+        font-family: 'Roboto', 'Noto', sans-serif;
+        font-size: 14px;
+        margin: 0;
+        padding: 24px;
+        background-color: var(--paper-grey-50);
+      }
+      td {
+        width: 400px;
+        vertical-align: top;
+      }
+      label {
+        display: block;
+        text-align: right;
+        font-size: 16px;
+        font-weight: bolder;
+        line-height: 43px;
+        padding-right: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <table>
+      <tr>
+        <td><label>Simple</label></td>
+        <td>
+          <zikes-selectbox placeholder="Simple">
+            <select multiple>
+              <option value="1" selected>One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+              <option value="A">AAAAA</option>
+              <option value="B">BBBBB</option>
+              <option value="C">CCCCC</option>
+            </select>
+          </zikes-selectbox>
+        </td>
+      </tr>
+      <tr>
+        <td><label>Simple Icon</label></td>
+        <td>
+          <zikes-selectbox placeholder="Simple Icon">
+            <select multiple>
+              <option value="1" icon="room" selected>One</option>
+              <option value="2" icon="done">Two</option>
+              <option value="3" icon="favorite">Three</option>
+              <option value="4" icon="attachment">Four</option>
+              <option value="5" icon="cancel" selected>Five</option>
+              <option value="6" icon="chevron-left">Six</option>
+              <option value="7" icon="chevron-right">Seven</option>
+              <option value="8" icon="class">Eight</option>
+              <option value="9" icon="drafts">Nine</option>
+              <option value="10" icon="grade">Ten</option>
+              <option value="11" icon="cached">Eleven</option>
+              <option value="12" icon="bookmark-border">Twelve</option>
+              <option value="A" icon="error">AAAAA</option>
+              <option value="B" icon="cloud">BBBBB</option>
+              <option value="C" icon="alarm">CCCCC</option>
+              <option value="D" icon="build">DDDDD</option>
+              <option value="E" icon="language">EEEEE</option>
+              <option value="F" icon="launch">FFFFF</option>
+              <option value="G" icon="font-download">GGGGG</option>
+              <option value="H" icon="help">HHHHH</option>
+              <option value="I" icon="shopping-cart">IIIII</option>
+              <option value="J" icon="search">JJJJJ</option>
+              <option value="K" icon="schedule">KKKKK</option>
+              <option value="L" icon="view-agenda">LLLLL</option>
+            </select>
+          </zikes-selectbox>
+        </td>
+      </tr>
+      <tr>
+        <td><label>Multiline</label></td>
+        <td>
+          <zikes-selectbox placeholder="Multiline">
+            <select multiple>
+              <option value="1" subtext="The Number One">One</option>
+              <option value="2" subtext="The Number Two">Two</option>
+              <option value="3" subtext="The Number Three">Three</option>
+              <option value="A" subtext="The Letter A">AAAAA</option>
+              <option value="B" subtext="The Letter B">BBBBB</option>
+              <option value="C" subtext="The Letter C">CCCCC</option>
+            </select>
+          </zikes-selectbox>
+        </td>
+      </tr>
+      <tr>
+        <td><label>Icon + Multiline</label></td>
+        <td>
+          <zikes-selectbox placeholder="Icon + Multiline">
+            <select multiple>
+              <option value="1" subtext="The Number One" icon="account-circle">One</option>
+              <option value="2" subtext="The Number Two" icon="send">Two</option>
+              <option value="3" subtext="The Number Three" icon="help-outline">Three</option>
+              <option value="A" subtext="The Letter A" icon="language">AAAAA</option>
+              <option value="B" subtext="The Letter B" icon="assignment-turned-in">BBBBB</option>
+              <option value="C" subtext="The Letter C" icon="assessment">CCCCC</option>
+            </select>
+          </zikes-selectbox>
+        </td>
+      </tr>
+      <tr>
+        <td><label>Src + Multiline</label></td>
+        <td>
+          <zikes-selectbox placeholder="Src + Multiline">
+            <select multiple>
+              <option value="1" subtext="The Number One" src="http://placekitten.com/g/32/32">One</option>
+              <option value="2" subtext="The Number Two" src="http://placekitten.com/g/32/32">Two</option>
+              <option value="3" subtext="The Number Three" src="http://placekitten.com/g/32/32">Three</option>
+              <option value="A" subtext="The Letter A" src="http://placekitten.com/g/32/32">AAAAA</option>
+              <option value="B" subtext="The Letter B" src="http://placekitten.com/g/32/32">BBBBB</option>
+              <option value="C" subtext="The Letter C" src="http://placekitten.com/g/32/32">CCCCC</option>
+            </select>
+          </zikes-selectbox>
+        </td>
+      </tr>
+    </table>
+
+  </body>
+</html>
