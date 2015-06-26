@@ -2,6 +2,8 @@
 
 A dropdown selector with search, replacing `<select>`s.
 
+### [Demo](http://polymer.zikes.me/zikes-selectbox.html)
+
 ## Simple Example:
 
 ```
