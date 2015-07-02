@@ -8,32 +8,32 @@
 
 <link rel="import" href="../iron-icon/iron-icon.html">
 
-<link rel="import" href="../zikes-chip/zikes-chiplist.html">
+<link rel="import" href="../vellum-chip/vellum-chiplist.html">
 
 <!--
 Turns a `<select>` into a functional combobox.
 
 Example:
 
-    <zikes-selectbox>
+    <vellum-selectbox>
       <select multiple>
         <option value="1">One</option>
         <option value="2">Two</option>
         <option value="3">Three</option>
       </select>
-    </zikes-selectbox>
+    </vellum-selectbox>
 
-    <zikes-selectbox>
+    <vellum-selectbox>
       <select multiple>
         <option value="1" icon="room">One</option>
         <option value="2" icon="send">Two</option>
         <option value="3" icon="okay">Three</option>
       </select>
-    </zikes-selectbox>
+    </vellum-selectbox>
 
 @demo demo/index.html
 -->
-<dom-module id="zikes-selectbox">
+<dom-module id="vellum-selectbox">
 
   <style>
     :host {
@@ -123,7 +123,7 @@ Example:
     <array-selector id="selector" items="{{data}}" selected="{{selected}}" multi toggle></array-selector>
 
     <div id="box">
-      <zikes-chiplist data="{{selected}}">
+      <vellum-chiplist data="{{selected}}">
         <input
             is="iron-input"
             id="textbox"
@@ -134,24 +134,46 @@ Example:
             on-blur="_blurBox"
             on-keydown="_keyPressed"
             placeholder="{{placeholder}}">
-      </zikes-chiplist>
+      </vellum-chiplist>
     </div>
     <div id="dropdown">
-      <template is="dom-repeat" items="{{data}}" as="item" filter="_search" id="itemList">
-        <template is="dom-if" if="{{_iconItem(item)}}">
-          <paper-icon-item on-tap="_selectItem" selected$="{{item.selected}}" highlighted$="{{item.highlighted}}">
-            <iron-icon icon="{{item.icon}}" src="{{item.src}}" item-icon></iron-icon>
-            <template is="dom-if" if="{{item.subtext}}"><paper-item-body two-line><div inner-h-t-m-l="{{_textHighlight(item.text, searchText)}}"></div><div secondary inner-h-t-m-l="{{_textHighlight(item.subtext, searchText)}}"></div></paper-item-body></template>
-            <template is="dom-if" if="{{!item.subtext}}"><div inner-h-t-m-l="{{_textHighlight(item.text, searchText)}}"></div></template>
-            <paper-ripple></paper-ripple>
-          </paper-icon-item>
+      <template is="dom-if" if="{{_showDropdown}}">
+        <template is="dom-if" if="{{_simple(data.0)}}">
+          <template is="dom-repeat" items="{{data}}" as="item" filter="_search" id="simpleList">
+            <paper-item on-tap="_selectItem" selected$="{{item.selected}}" highlighted$="{{item.highlighted}}">
+              <div inner-h-t-m-l="{{_textHighlight(item.text, searchText)}}"></div>
+              <paper-ripple></paper-ripple>
+            </paper-item>
+          </template>
         </template>
-        <template is="dom-if" if="{{!_iconItem(item)}}">
-          <paper-item on-tap="_selectItem" selected$="{{item.selected}}" highlighted$="{{item.highlighted}}">
-            <template is="dom-if" if="{{item.subtext}}"><paper-item-body two-line><div inner-h-t-m-l="{{_textHighlight(item.text, searchText)}}"></div><div secondary inner-h-t-m-l="{{_textHighlight(item.subtext, searchText)}}"></div></paper-item-body></template>
-            <template is="dom-if" if="{{!item.subtext}}"><div inner-h-t-m-l="{{_textHighlight(item.text, searchText)}}"></div></template>
-            <paper-ripple></paper-ripple>
-          </paper-item>
+
+        <template is="dom-if" if="{{_twoLine(data.0)}}">
+          <template is="dom-repeat" items="{{data}}" as="item" filter="_search" id="twoLineList">
+            <paper-item on-tap="_selectItem" selected$="{{item.selected}}" highlighted$="{{item.highlighted}}">
+              <paper-item-body two-line><div inner-h-t-m-l="{{_textHighlight(item.text, searchText)}}"></div><div secondary inner-h-t-m-l="{{_textHighlight(item.subtext, searchText)}}"></div></paper-item-body>
+              <paper-ripple></paper-ripple>
+            </paper-item>
+          </template>
+        </template>
+
+        <template is="dom-if" if="{{_simpleIcon(data.0)}}">
+          <template is="dom-repeat" items="{{data}}" as="item" filter="_search" id="simpleIconList">
+            <paper-icon-item on-tap="_selectItem" selected$="{{item.selected}}" highlighted$="{{item.highlighted}}">
+              <iron-icon icon="{{item.icon}}" src="{{item.src}}" item-icon></iron-icon>
+              <div inner-h-t-m-l="{{_textHighlight(item.text, searchText)}}"></div>
+              <paper-ripple></paper-ripple>
+            </paper-icon-item>
+          </template>
+        </template>
+
+        <template is="dom-if" if="{{_twoLineIcon(data.0)}}">
+          <template is="dom-repeat" items="{{data}}" as="item" filter="_search" id="twoLineIconList">
+            <paper-icon-item on-tap="_selectItem" selected$="{{item.selected}}" highlighted$="{{item.highlighted}}">
+              <iron-icon icon="{{item.icon}}" src="{{item.src}}" item-icon></iron-icon>
+              <paper-item-body two-line><div inner-h-t-m-l="{{_textHighlight(item.text, searchText)}}"></div><div secondary inner-h-t-m-l="{{_textHighlight(item.subtext, searchText)}}"></div></paper-item-body>
+              <paper-ripple></paper-ripple>
+            </paper-icon-item>
+          </template>
         </template>
       </template>
     </div>
@@ -161,52 +183,44 @@ Example:
     (function() {
       "use strict";
 
-      if (!Array.prototype.findIndex) {
-        Array.prototype.findIndex = function(predicate) {
-          if (this == null) {
-            throw new TypeError('Array.prototype.findIndex called on null or undefined');
-          }
-          if (typeof predicate !== 'function') {
-            throw new TypeError('predicate must be a function');
-          }
-          var list = Object(this);
-          var length = list.length >>> 0;
-          var thisArg = arguments[1];
-          var value;
-
-          for (var i = 0; i < length; i++) {
-            value = list[i];
-            if (predicate.call(thisArg, value, i, list)) {
-              return i;
-            }
-          }
-          return -1;
-        };
-      }
-
-
-
       Polymer({
-        is: 'zikes-selectbox',
+        is: 'vellum-selectbox',
 
         properties: {
           data: {
             type: Array,
+            notify: true,
             value: function() {return []}
           },
           selected: {
             type: Array,
+            notify: true,
             value: function() {return []}
           },
           searchText: {
             type: String,
             value: "",
+            notify: true,
             observer: '_updateSearch'
           },
           _currentItem: {
             type: Number,
             observer: '_highlightItem'
           }
+        },
+
+        observers: ['dataChanged(data.splices)'],
+
+        dataChanged: function(rec) {
+          this.data.forEach(function(itm,idx){
+            if(
+              (itm.selected && this.$.selector.selected.indexOf(itm) === -1)
+              ||
+              (!itm.selected && this.$.selector.selected.indexOf(itm) !== -1)
+            ) {
+              this.$.selector.select(itm);
+            }
+          },this);
         },
 
         _clearHighlighted: function() {
@@ -305,6 +319,7 @@ Example:
 
         _focusBox: function() {
           this.$.box.classList.add('active');
+          this._showDropdown = true;
         },
         _blurBox: function() {
           this._blurHandle = this.async((function(){
@@ -321,6 +336,7 @@ Example:
         created: function() {
           var data = [];
           var select = Polymer.dom(this).querySelector('select');
+          if(!select) return;
           var children = Array.prototype.slice.call(select.childNodes);
           children.forEach(function(el){
             if(el.nodeType === 3) return;
@@ -340,11 +356,7 @@ Example:
         },
 
         ready: function() {
-          if(this._data.length > 0) this.data = this._data;
-
-          this.data.forEach(function(itm){
-            if(itm.selected) this.$.selector.select(itm);
-          },this);
+          if(this._data && this._data.length > 0) this.data = this._data;
         },
 
         _selectItem: function(e) {
@@ -373,23 +385,45 @@ Example:
             return item.group === group;
           });
         },
+        _simple: function(item) {
+          return item && item.src === undefined && item.icon === undefined && item.subtext === undefined;
+        },
+        _twoLine: function(item) {
+          return item && item.src === undefined && item.icon === undefined && item.subtext !== undefined;
+        },
+        _simpleIcon: function(item) {
+          return item && (item.src !== undefined || item.icon !== undefined) && item.subtext === undefined;
+        },
+        _twoLineIcon: function(item) {
+          return item && (item.src !== undefined || item.icon !== undefined) && item.subtext !== undefined;
+        },
         _iconItem: function(item) {
           return item.src !== undefined || item.icon !== undefined;
         },
 
         _search: function(itm) {
-          return itm.text.toLowerCase().indexOf(this.searchText.toLowerCase()) > -1
+          return this.searchText === ""
+                 || itm.text.toLowerCase().indexOf(this.searchText.toLowerCase()) > -1
                  || (itm.subtext && itm.subtext.toLowerCase().indexOf(this.searchText.toLowerCase()) > -1);
         },
         _updateSearch: function() {
-          this.$.itemList._filterChanged();
+          if(this._simple(this.data[0])){
+            Polymer.dom(this.root).querySelector('#simpleList')._filterChanged();
+          } else if(this._twoLine(this.data[0])) {
+            Polymer.dom(this.root).querySelector('#twoLineList')._filterChanged();
+          } else if(this._simpleIcon(this.data[0])) {
+            Polymer.dom(this.root).querySelector('#simpleIconList')._filterChanged();
+          } else if(this._twoLineIcon(this.data[0])) {
+            Polymer.dom(this.root).querySelector('#twoLineIconList')._filterChanged();
+          }
+
           if(arguments[1] !== undefined){
             this._focusBox();
             this.async(this._scrollDropdown);
           }
         },
         _textHighlight: function(str, searchText) {
-          return str.replace(new RegExp(searchText, 'i'), function(f){return '<span class="texthl zikes-selectbox">'+f+'</span>'});
+          return (searchText === "" || searchText === undefined) ? str : str.replace(new RegExp(searchText, 'i'), function(f){return '<span class="texthl vellum-selectbox">'+f+'</span>'});
         }
 
       });

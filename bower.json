@@ -1,14 +1,14 @@
 {
-  "name": "zikes-selectbox",
-  "version": "0.0.0",
+  "name": "vellum-selectbox",
+  "version": "0.0.1",
   "description": "Turns a `<select>` into a functional combobox.",
   "keywords": [
     "web-component",
     "web-components",
     "polymer"
   ],
-  "main": "zikes-selectbox.html",
-  "homepage": "https://github.com/zikes/zikes-selectbox",
+  "main": "vellum-selectbox.html",
+  "homepage": "https://github.com/zikes/vellum-selectbox",
   "ignore": [
     "/.*",
     "/test/",
@@ -16,7 +16,7 @@
   ],
   "dependencies": {
     "polymer": "Polymer/polymer#^1.0.0",
-    "zikes-chip": "zikes/zikes-chip",
+    "vellum-chip": "zikes/vellum-chip",
     "paper-styles": "PolymerElements/paper-styles#^1.0.0",
     "paper-item": "PolymerElements/paper-item#^1.0.0",
     "iron-input": "PolymerElements/iron-input#^1.0.0",

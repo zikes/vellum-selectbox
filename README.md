@@ -1,13 +1,13 @@
-# zikes-selectbox
+# vellum-selectbox
 
 A dropdown selector with search, replacing `<select>`s.
 
-### [Demo](http://polymer.zikes.me/zikes-selectbox.html)
+### [Demo](http://polymer.zikes.me/vellum-selectbox.html)
 
 ## Simple Example:
 
 ```
-<zikes-selectbox placeholder="Simple">
+<vellum-selectbox placeholder="Simple">
   <select multiple>
     <option value="tt0111161">The Shawshank Redemption</option>
     <option value="tt0068646">The Godfather</option>
@@ -16,7 +16,7 @@ A dropdown selector with search, replacing `<select>`s.
     <option value="tt0110912">Pulp Fiction</option>
     <option value="tt0108052">Schindler's List</option>
   </select>
-</zikes-selectbox>
+</vellum-selectbox>
 ```
 
 ![simple](./screenshots/simple.png)
@@ -24,7 +24,7 @@ A dropdown selector with search, replacing `<select>`s.
 ## More Complex:
 
 ```
-<zikes-selectbox placeholder="Src + Multiline">
+<vellum-selectbox placeholder="Src + Multiline">
   <select multiple>
     <option value="1" subtext="The Number One" icon="account-circle">One</option>
     <option value="2" subtext="The Number Two" icon="send">Two</option>
@@ -33,7 +33,7 @@ A dropdown selector with search, replacing `<select>`s.
     <option value="B" subtext="The Letter B" icon="assignment-turned-in">BBBBB</option>
     <option value="C" subtext="The Letter C" icon="assessment">CCCCC</option>
   </select>
-</zikes-selectbox>
+</vellum-selectbox>
 ```
 
 ![icon+multiline](./screenshots/icon-multiline.png)
