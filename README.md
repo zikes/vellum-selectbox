@@ -2,7 +2,7 @@
 
 A dropdown selector with search, replacing `<select>`s.
 
-### [Demo](http://polymer.zikes.me/vellum-selectbox.html)
+### [Demo](https://vellum-selectbox.polymer.zikes.me/demo/)
 
 ## Simple Example:
 

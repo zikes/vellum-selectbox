@@ -1,0 +1,144 @@
+<link rel="import" href="/bower_components/polymer/polymer.html">
+<link rel="import" href="/bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="/bower_components/paper-styles/paper-styles.html">
+<link rel="import" href="/bower_components/paper-ripple/paper-ripple.html">
+
+<!--
+Chip elements designed to match http://www.google.com/design/spec/components/chips.html
+
+Example:
+
+    <link rel="import" href="path/to/iron-icons/iron-icons.html">
+
+    <vellum-chip value="123">Contents</vellum-chip>
+    <vellum-chip icon="room" value="1234">1234 - Somewhere, ST</vellum-chip>
+    <vellum-chip icon="assessment" value="123456">Scan 123456</vellum-chip>
+
+@demo demo/index.html
+-->
+<dom-module id="vellum-chip">
+  <style>
+    :host {
+      @apply(--paper-font-body2);
+      @apply(--shadow-transition);
+
+      display: inline-block;
+      box-sizing: border-box;
+      background: var(--paper-grey-100);
+      padding: 8px 12px;
+      border-radius: 16px;
+      max-height: 32px;
+      position: relative;
+      line-height: inherit !important;
+      cursor: pointer;
+      user-select: none;
+      max-width: 250px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .icon-container {
+      display: none;
+      border-radius: 16px;
+      background: var(--paper-grey-300);
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 32px;
+      width: 32px;
+      line-height: 31px;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    :host([elevation="1"]) {@apply(--shadow-elevation-2dp);}
+    :host([elevation="2"]) {@apply(--shadow-elevation-4dp);}
+    :host([elevation="3"]) {@apply(--shadow-elevation-6dp);}
+    :host([elevation="4"]) {@apply(--shadow-elevation-8dp);}
+    :host([elevation="5"]) {@apply(--shadow-elevation-16dp);}
+
+    :host[src], :host[icon] {
+      padding-left: 40px;
+    }
+    :host[src] .icon-container,
+    :host[icon] .icon-container {
+      display: inline-block;
+    }
+
+    iron-icon {
+      color: var(--paper-blue-500);
+    }
+
+    .icon-container img {
+      width: 32px;
+      height: 32px;
+    }
+
+  </style>
+
+  <template>
+    <div class="icon-container">
+      <template is="dom-if" if="{{src}}">
+        <img src="[[src]]">
+      </template>
+      <template is="dom-if" if="{{icon}}">
+        <iron-icon icon="[[icon]]"></iron-icon>
+      </template>
+    </div>
+    <slot></slot>
+    <paper-ripple></paper-ripple>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'vellum-chip',
+
+      properties: {
+        /**
+         * A value to be stored and read.
+         */
+        value: {
+          type: Object,
+          notify: true
+        },
+
+        /**
+         * The z-depth of the element, from 0-5.
+         */
+        elevation: {
+          type: Number,
+          reflectToAttribute: true,
+          value: 0
+        },
+
+        /**
+         * If true, changes in elevation will be animated.
+         */
+        animated: {
+          type: Boolean,
+          reflectToAttribute: true,
+          value: true
+        },
+
+        /**
+         * The URL of an image for the icon, if any.
+         * Should not be specified if `icon` is also provided.
+         */
+        src: {
+          type: String,
+          reflectToAttribute: true
+        },
+
+        /**
+         * The icon name or index. Should not be specified if
+         * `src` is also provided.
+         */
+        icon: {
+          type: String,
+          reflectToAttribute: true
+        }
+      }
+    });
+  </script>
+</dom-module>
+

@@ -1,0 +1,36 @@
+{
+  "name": "vellum-chip",
+  "description": "Chip elements designed to match http://www.google.com/design/spec/components/chips.html",
+  "keywords": [
+    "web-components",
+    "web-component",
+    "polymer"
+  ],
+  "main": "vellum-chip.html",
+  "homepage": "https://github.com/zikes/vellum-chip",
+  "ignore": [
+    "/.*",
+    "/test/",
+    "/demo/"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.9.3",
+    "iron-icon": "PolymerElements/iron-icon#^1.0.0",
+    "paper-styles": "PolymerElements/paper-styles#^1.0.0",
+    "paper-ripple": "PolymerElements/paper-ripple#^1.0.0"
+  },
+  "devDependencies": {
+    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
+    "iron-icons": "PolymerElements/iron-icons#^1.0.0",
+    "web-component-tester": "*"
+  },
+  "_release": "b373caa950",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "b373caa950298cc489748d4f696a0f78a721944f"
+  },
+  "_source": "https://github.com/zikes/vellum-chip.git",
+  "_target": "*",
+  "_originalSource": "zikes/vellum-chip"
+}
